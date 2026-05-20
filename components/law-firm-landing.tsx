@@ -25,7 +25,7 @@ import {
   Users,
   X
 } from "lucide-react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const navItems = [
   { label: "Про нас", href: "#about" },
@@ -123,6 +123,38 @@ function SectionHeading({ eyebrow, title, text }: { eyebrow: string; title: stri
 
 export function LawFirmLanding() {
   const [open, setOpen] = useState(false);
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  async function handleConsultationSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setFormStatus("sending");
+
+    const formData = new FormData(event.currentTarget);
+    const payload = {
+      name: String(formData.get("name") || ""),
+      phone: String(formData.get("phone") || ""),
+      message: String(formData.get("message") || "")
+    };
+
+    try {
+      const response = await fetch("/api/telegram", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
+      event.currentTarget.reset();
+      setFormStatus("success");
+    } catch {
+      setFormStatus("error");
+    }
+  }
 
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-white">
@@ -355,6 +387,7 @@ export function LawFirmLanding() {
           </motion.div>
 
           <motion.form
+            onSubmit={handleConsultationSubmit}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -364,20 +397,30 @@ export function LawFirmLanding() {
           >
             <label className="mb-5 block">
               <span className="mb-2 block text-sm text-slate-300">Ім&rsquo;я</span>
-              <input className="field px-4 py-4" type="text" name="name" placeholder="Ваше ім&rsquo;я" />
+              <input className="field px-4 py-4" type="text" name="name" placeholder="Ваше ім&rsquo;я" required />
             </label>
             <label className="mb-5 block">
               <span className="mb-2 block text-sm text-slate-300">Телефон</span>
-              <input className="field px-4 py-4" type="tel" name="phone" placeholder="+380 XX XXX XX XX" />
+              <input className="field px-4 py-4" type="tel" name="phone" placeholder="+380 XX XXX XX XX" required />
             </label>
             <label className="mb-6 block">
               <span className="mb-2 block text-sm text-slate-300">Повідомлення</span>
               <textarea className="field min-h-36 resize-y px-4 py-4" name="message" placeholder="Коротко опишіть ваше питання" />
             </label>
-            <button type="button" className="group inline-flex w-full items-center justify-center gap-3 bg-gold px-7 py-4 font-semibold text-ink transition hover:bg-champagne">
-              Надіслати заявку
+            <button
+              type="submit"
+              disabled={formStatus === "sending"}
+              className="group inline-flex w-full items-center justify-center gap-3 bg-gold px-7 py-4 font-semibold text-ink transition hover:bg-champagne disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              {formStatus === "sending" ? "Надсилання..." : "Надіслати заявку"}
               <ArrowRight className="size-5 transition group-hover:translate-x-1" />
             </button>
+            {formStatus === "success" ? (
+              <p className="mt-4 text-sm leading-6 text-emerald-300">Заявку надіслано. Ми зв&rsquo;яжемося з вами найближчим часом.</p>
+            ) : null}
+            {formStatus === "error" ? (
+              <p className="mt-4 text-sm leading-6 text-red-300">Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте за номером 050 107 41 37.</p>
+            ) : null}
           </motion.form>
         </div>
       </section>
