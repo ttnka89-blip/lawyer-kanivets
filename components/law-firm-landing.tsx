@@ -123,37 +123,24 @@ function SectionHeading({ eyebrow, title, text }: { eyebrow: string; title: stri
 
 export function LawFirmLanding() {
   const [open, setOpen] = useState(false);
-  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  async function handleConsultationSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleConsultationSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setFormStatus("sending");
 
     const formData = new FormData(event.currentTarget);
-    const payload = {
-      name: String(formData.get("name") || ""),
-      phone: String(formData.get("phone") || ""),
-      message: String(formData.get("message") || "")
-    };
+    const name = String(formData.get("name") || "").trim();
+    const phone = String(formData.get("phone") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+    const subject = "Заявка на консультацію з сайту";
+    const body = [
+      "Нова заявка з сайту lawyer-kanivets.vercel.app",
+      "",
+      `Ім'я: ${name}`,
+      `Телефон: ${phone}`,
+      message ? `Повідомлення: ${message}` : "Повідомлення: не вказано"
+    ].join("\n");
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        throw new Error("Request failed");
-      }
-
-      event.currentTarget.reset();
-      setFormStatus("success");
-    } catch {
-      setFormStatus("error");
-    }
+    window.location.href = `mailto:avtopravo1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
   return (
@@ -409,18 +396,11 @@ export function LawFirmLanding() {
             </label>
             <button
               type="submit"
-              disabled={formStatus === "sending"}
-              className="group inline-flex w-full items-center justify-center gap-3 bg-gold px-7 py-4 font-semibold text-ink transition hover:bg-champagne disabled:cursor-not-allowed disabled:opacity-70"
+              className="group inline-flex w-full items-center justify-center gap-3 bg-gold px-7 py-4 font-semibold text-ink transition hover:bg-champagne"
             >
-              {formStatus === "sending" ? "Надсилання..." : "Надіслати заявку"}
+              Надіслати заявку
               <ArrowRight className="size-5 transition group-hover:translate-x-1" />
             </button>
-            {formStatus === "success" ? (
-              <p className="mt-4 text-sm leading-6 text-emerald-300">Заявку надіслано. Ми зв&rsquo;яжемося з вами найближчим часом.</p>
-            ) : null}
-            {formStatus === "error" ? (
-              <p className="mt-4 text-sm leading-6 text-red-300">Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте за номером 050 107 41 37.</p>
-            ) : null}
           </motion.form>
         </div>
       </section>
