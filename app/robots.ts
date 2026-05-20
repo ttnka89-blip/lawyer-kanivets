@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/"
     },
-    sitemap: "https://lawyer-kanivets.vercel.app/google-sitemap.xml"
+    sitemap: "https://lawyer-kanivets.vercel.app/sitemap.xml"
   };
 }
