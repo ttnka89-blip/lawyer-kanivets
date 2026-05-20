@@ -208,12 +208,12 @@ export function LawFirmLanding() {
             </div>
             <h1 className="max-w-4xl text-4xl font-semibold leading-[1.08] text-white md:text-6xl lg:text-7xl">
               Захист водіїв, кримінальні справи та митне право
+              <span className="mt-5 block text-sm font-semibold uppercase tracking-[0.28em] text-gold md:text-base">
+                Your problem is my problem
+              </span>
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">
               Допомагаю у справах за ст. 130 КУпАП, ДТП, кримінальних провадженнях та митних спорах
-            </p>
-            <p className="mt-5 text-sm font-semibold uppercase tracking-[0.28em] text-gold">
-              Your problem is my problem
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <a href="#consultation" className="group inline-flex items-center justify-center gap-3 bg-gold px-7 py-4 font-semibold text-ink shadow-premium transition hover:-translate-y-0.5 hover:bg-champagne">
