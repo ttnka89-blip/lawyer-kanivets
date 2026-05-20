@@ -414,9 +414,9 @@ export function LawFirmLanding() {
             <h2 className="text-3xl font-semibold leading-tight md:text-5xl">Почнімо з розмови</h2>
             <div className="mt-8 grid gap-5 text-slate-700">
               <a className="flex items-center gap-4 transition hover:text-gold" href="tel:+380501074137"><Phone className="size-5" /> 050 107 41 37</a>
-              <a className="flex items-center gap-4 transition hover:text-gold" href="mailto:office@lexora.ua"><Mail className="size-5" /> office@lexora.ua</a>
+              <a className="flex items-center gap-4 transition hover:text-gold" href="mailto:avtopravo1@gmail.com"><Mail className="size-5" /> avtopravo1@gmail.com</a>
               <p className="flex items-center gap-4"><ShieldCheck className="size-5" /> Свідоцтво про право на заняття адвокатською діяльністю №21/1279</p>
-              <p className="flex items-center gap-4"><MapPin className="size-5" /> м. Київ, вул. Велика Васильківська, 72</p>
+              <p className="flex items-center gap-4"><MapPin className="size-5" /> м. Ужгород, вул. Загорська, 51</p>
             </div>
             <div className="mt-8 flex gap-3">
               <a href="#" aria-label="Facebook" className="grid size-11 place-items-center border border-slate-200 transition hover:border-gold hover:text-gold"><Facebook className="size-5" /></a>
@@ -428,7 +428,7 @@ export function LawFirmLanding() {
           <div className="min-h-[360px] overflow-hidden border border-slate-200 shadow-[0_18px_60px_rgba(15,23,42,.12)]">
             <iframe
               title="Канівець Олександр Петрович на Google Maps"
-              src="https://www.google.com/maps?q=Kyiv%20Velyka%20Vasylkivska%2072&output=embed"
+              src="https://www.google.com/maps?q=%D0%A3%D0%B6%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%20%D0%97%D0%B0%D0%B3%D0%BE%D1%80%D1%81%D1%8C%D0%BA%D0%B0%2051&output=embed"
               className="h-full min-h-[360px] w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
