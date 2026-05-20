@@ -206,7 +206,7 @@ export function LawFirmLanding() {
               <ShieldCheck className="size-4 text-gold" />
               Адвокат Канівець Олександр Петрович | свідоцтво №21/1279
             </div>
-            <h1 className="max-w-4xl text-4xl font-semibold leading-[1.08] text-white md:text-6xl lg:text-7xl">
+            <h1 className="max-w-4xl bg-gradient-to-r from-white via-champagne to-gold bg-clip-text text-4xl font-semibold leading-[1.08] text-transparent drop-shadow-[0_12px_38px_rgba(216,180,106,0.22)] md:text-6xl lg:text-7xl">
               Your problem is my problem
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">
