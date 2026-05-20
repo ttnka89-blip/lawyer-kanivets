@@ -207,10 +207,7 @@ export function LawFirmLanding() {
               Адвокат Канівець Олександр Петрович | свідоцтво №21/1279
             </div>
             <h1 className="max-w-4xl text-4xl font-semibold leading-[1.08] text-white md:text-6xl lg:text-7xl">
-              Захист водіїв, кримінальні справи та митне право
-              <span className="mt-5 block text-sm font-semibold uppercase tracking-[0.28em] text-gold md:text-base">
-                Your problem is my problem
-              </span>
+              Your problem is my problem
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">
               Допомагаю у справах за ст. 130 КУпАП, ДТП, кримінальних провадженнях та митних спорах
