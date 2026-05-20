@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
 type ConsultationRequest = {
   name?: string;
@@ -11,11 +12,12 @@ function clean(value: unknown) {
 }
 
 export async function POST(request: Request) {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  const apiKey = process.env.RESEND_API_KEY;
+  const fromEmail = process.env.CONTACT_FROM_EMAIL || "Lawyer Kanivets <onboarding@resend.dev>";
+  const toEmail = process.env.CONTACT_TO_EMAIL || "avtopravo1@gmail.com";
 
-  if (!botToken || !chatId) {
-    return NextResponse.json({ error: "Telegram is not configured" }, { status: 500 });
+  if (!apiKey) {
+    return NextResponse.json({ error: "Email service is not configured" }, { status: 500 });
   }
 
   const body = (await request.json()) as ConsultationRequest;
@@ -27,6 +29,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Name and phone are required" }, { status: 400 });
   }
 
+  const resend = new Resend(apiKey);
   const text = [
     "Нова заявка з сайту lawyer-kanivets.vercel.app",
     "",
@@ -35,20 +38,16 @@ export async function POST(request: Request) {
     message ? `Повідомлення: ${message}` : "Повідомлення: не вказано"
   ].join("\n");
 
-  const telegramResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text,
-      disable_web_page_preview: true
-    })
+  const { error } = await resend.emails.send({
+    from: fromEmail,
+    to: [toEmail],
+    subject: "Нова заявка з сайту",
+    text,
+    replyTo: toEmail
   });
 
-  if (!telegramResponse.ok) {
-    return NextResponse.json({ error: "Telegram request failed" }, { status: 502 });
+  if (error) {
+    return NextResponse.json({ error: "Email request failed" }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });

@@ -137,7 +137,7 @@ export function LawFirmLanding() {
     };
 
     try {
-      const response = await fetch("/api/telegram", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
