@@ -210,7 +210,7 @@ export function LawFirmLanding() {
               Your problem is my problem
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">
-              Допомагаю у справах за ст. 130 КУпАП, ДТП, кримінальних провадженнях та митних спорах
+              Захист у кримінальних справах, митних справах, справах про адміністративні правопорушення, ЄСПЛ та інші напрями
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <a href="#consultation" className="group inline-flex items-center justify-center gap-3 bg-gold px-7 py-4 font-semibold text-ink shadow-premium transition hover:-translate-y-0.5 hover:bg-champagne">
